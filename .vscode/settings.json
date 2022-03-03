@@ -2,5 +2,8 @@
     "cSpell.words": [
         "gamearea",
         "gamestart"
+    ],
+    "cSpell.ignoreWords": [
+        "everyinterval"
     ]
 }
