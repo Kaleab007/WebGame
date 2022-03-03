@@ -1,77 +1,125 @@
 <html>
-<head>
-<style>
-    canvas{
-        border: 15px solid;
-        background-image: url(https://i0.wp.com/sitn.hms.harvard.edu/wp-content/uploads/2020/07/Mars_zichtbaar_vanaf_de_alpe_du_hues-scaled.jpg?resize=1000/1000=1);
-    }
-</style>
-<body onload="startGame()">
-<script type="text/javascript">
- 
- //obstacle.size
- maxHeight=20;
-    minHeight=100;
-    minWidth=10;
-    maxWidth=20;
-    minGap=200;
-    maxGap=500;
-    var myObstacles=[];
- function startGame () {
-    gamearea.start();
+  <head>
     
-}  
-//interval.for.obstacle
-function everyinterval(n){
-    if(gamearea.frame%n==0)return true;
-    return false;
-}
-function randGap(){
-    return minGap+Math.random
-}
-//game.scale
-function obstacle()
-this.height=Math.floor(minHeight+Math.random()*(maxHeight-minHeight+1));
-this.width=Math.floor(maxWidth+Math.random()*(maxWidth-minWidth +1));
-this.draw=function(){
-    x=1200;
-    y=gamearea.canvas.height-this.height;
-    gamearea.context.fillRect(x,y,this.width,this.height)
-}
-var gamearea = {
-    canvas:document.createElement ("canvas"),
-    start:function () {
-        this.canvas.height=1000;
-        this.canvas.width=1000;
-        //obstacle.speed
-        document.body.insertBefore(this.canvas,document.body.childNodes[0]);
-       this.frame=0;
-        this.context=this.canvas.getContext("2d");
-        this.interval=setInterval(this.updateGameArea,4);
-
-     }, 
-     updateGameArea: function(){
-         gamearea.clear();
-         if(everyinterval (150)){
-             myObstacles.push(new obstacle());
-         }
-         for(i=0; i<myObstacles.length;i++){
-         myObstacles[i].x=-1;
-         myObstacles[i].draw();
+    <style>
+      canvas {
+        background-size: cover;
+        background-image: url(https://i0.wp.com/sitn.hms.harvard.edu/wp-content/uploads/2020/07/Mars_zichtbaar_vanaf_de_alpe_du_hues-scaled.jpg?resize=1000/1000=1);
+      }
+    </style>
+    <body onload="startGame()">
+      <script type="text/javascript">
+        
+        //obstacle.size
+        class Obstacle {
+          constructor() {
+            this.maxHeight = 150;
+            this.minHeight = 200;
+            this.minWidth = 10;
+            this.maxWidth = 80;
+            this.minGap = 200;
+            this.maxGap = 500;
+            
+          }
+          randGap() {
+            return Math.floor(
+              this.minGap + Math.random() * (this.maxGap - this.minGap + 1)
+            );
+          }
+          draw() {
+            gamearea.context.fillRect(1840,850, this.maxWidth, this.maxHeight);
+          }
         }
-        gamearea.frame+=1;
-    },
-clear:function (){
-    gamearea.context.clearRect(0,0, this.canvas.width,this.canvas.width);
-},
-stop:function(){
-}
-}
+        let myobstacle = new Obstacle();
+        console.log(myobstacle);
 
+        var myObstacles = [];
+        function startGame() {
+          gamearea.start();
+        }
+        //interval.for.obstacle
+        function everyinterval(n) {
+          if (gamearea.frame % n == 0) return true;
+          return false;
+        }
 
-</script>
+        //player1
+        var player = {
+          x: 10,
+          y:850,
+          speedY: 100,
+          jump() {
+            console.log("jump");
+            gamearea.context.translate (0,this.speedY)
+            var img = new Image(); // Create new img element
+            img.src = "./assets/png/Idle.png"; // Set source path
+            gamearea.context.drawImage(img,this.x,this.y+this.speedY);
+           
+          },
+          update: function () {
+            var img = new Image(); // Create new img element
+            img.src = "./assets/png/Idle.png"; // Set source path
+            gamearea.context.drawImage(img, this.x, this.y);
+          },
+        };
+        //game.scale
+        //map=obstacle
+        function map() {
+          this.height = Math.floor(
+            minHeight + Math.random() * (maxHeight - minHeight + 1)
+          );
+          this.width = Math.floor(
+            maxWidth + Math.random() * (maxWidth - minWidth + 1)
+          );
+          this.draw = function () {
+            //x=1200;
+            // y=gamearea.canvas.height-this.height;
+            //gamearea.context.fillRect(x,y,this.width,this.height)
+          };
+        }
+        var gamearea = {
+          canvas: document.createElement("canvas"),
+          start: function () {
+            this.canvas.height = 1000;
+            this.canvas.width = 1900;
 
-</body>
-</head>
+            document.body.insertBefore(
+              this.canvas,
+              document.body.childNodes[0]
+            );
+            this.frame = 0;
+            this.context = this.canvas.getContext("2d");
 
+            this.interval = setInterval(this.updateGameArea, 4);
+            window.addEventListener("keydown", player.jump);
+          },
+          //randomizingObstacle
+          updateGameArea: function () {
+            gamearea.clear();
+            //if(everyinterval (gap)){
+            let updatedobstacle = new Obstacle();
+            myObstacles.push(updatedobstacle);
+            let gap = updatedobstacle.randGap();
+            gamearea.frame = 0;
+            // }
+            for (i = 0; i < myObstacles.length; i++) {
+              myObstacles[i].x = -1;
+              myObstacles[i].draw();
+            }
+            player.update();
+            gamearea.frame += 1;
+          },
+          clear: function () {
+            gamearea.context.clearRect(
+              0,
+              0,
+              this.canvas.width,
+              this.canvas.width
+            );
+          },
+          stop: function () {},
+        };
+      </script>
+    </body>
+  </head>
 </html>
