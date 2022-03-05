@@ -1,6 +1,6 @@
 <html>
   <head>
-    
+    <link href="main.css">
     <style>
       canvas {
         background-size: cover;
@@ -9,6 +9,7 @@
     </style>
     <body onload="startGame()">
       <script type="text/javascript">
+         
         
         //obstacle.size
         class Obstacle {
@@ -31,7 +32,7 @@
           }
         }
         let myobstacle = new Obstacle();
-        console.log(myobstacle);
+        
 
         var myObstacles = [];
         function startGame() {
@@ -48,14 +49,50 @@
           x: 10,
           y:850,
           speedY: 100,
+          currentJumpHeight:0,
           jump() {
-            console.log("jump");
-            gamearea.context.translate (0,this.speedY)
+            console.log(player.currentJumpHeight)
+            // gamearea.context.translate (0,this.speedY)
             var img = new Image(); // Create new img element
             img.src = "./assets/png/Idle.png"; // Set source path
-            gamearea.context.drawImage(img,this.x,this.y+this.speedY);
-           
-          },
+            //gamearea.context.drawImage(img, 0, 400, 100, 100);
+
+ if(player.currentJumpHeight < 15) {
+    console.log(player.currentJumpHeight)
+  gamearea.context.clearRect(0, 0,player.x,player.y)
+  gamearea.context.translate(0, -20);
+  gamearea.context.drawImage(img, 0, 400, player.x,player.y);
+    setTimeout(function (){
+        player.jump()
+    },15)
+    player.currentJumpHeight++
+  } else {
+    fall()
+  }
+
+
+//clearing.the.jump
+//newPos:function() {
+   // if(player.y<280)=2;
+//}
+//player.y=player.yplayer.speedY;
+//if(player.speedY==2 && player.y==850) {
+   // player.speedY=0;
+//}
+
+function fall() {
+  if(player.currentJumpHeight > 0) {
+    console.log(player.currentJumpHeight)
+    gamearea.context.clearRect(0,0,player.x,player.y)
+    gamearea.context.translate(0, 20);
+    gamearea.context.drawImage(img, 0, 200, player.x,player.y);
+    setTimeout(function (){
+        fall()
+    },50)
+    player.currentJumpHeight--
+  }
+}
+      },
           update: function () {
             var img = new Image(); // Create new img element
             img.src = "./assets/png/Idle.png"; // Set source path
@@ -77,6 +114,7 @@
             //gamearea.context.fillRect(x,y,this.width,this.height)
           };
         }
+        //size.of.the.game
         var gamearea = {
           canvas: document.createElement("canvas"),
           start: function () {
@@ -93,6 +131,7 @@
             this.interval = setInterval(this.updateGameArea, 4);
             window.addEventListener("keydown", player.jump);
           },
+
           //randomizingObstacle
           updateGameArea: function () {
             gamearea.clear();
@@ -122,4 +161,4 @@
       </script>
     </body>
   </head>
-</html>
+</html> 

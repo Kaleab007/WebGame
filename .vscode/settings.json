@@ -2,9 +2,14 @@
     "cSpell.words": [
         "gamearea",
         "gamestart",
+        "Pseudocode",
         "updatedobstacle"
     ],
     "cSpell.ignoreWords": [
-        "everyinterval"
+        "Canva",
+        "everyinterval",
+        "myobstacle",
+        "yplayer",
+        "ythis"
     ]
 }
