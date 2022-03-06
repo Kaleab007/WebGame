@@ -8,9 +8,12 @@
       }
     </style>
     <body onload="startGame()">
+        <audio src="jumpsound.mp3" id="audioJ"></audio>
+        <audio src="gameover.mp3" id="audioG"></audio>
+    
       <script type="text/javascript">
          
-        
+      
         //obstacle.size
         class Obstacle {
           constructor() {
@@ -20,6 +23,7 @@
             this.maxWidth = 80;
             this.minGap = 200;
             this.maxGap = 500;
+            
             
           }
           randGap() {
@@ -33,7 +37,9 @@
         }
         let myobstacle = new Obstacle();
         
-
+        
+        var audio=document.getElementById("audioJ");
+        var audio=document.getElementById("audioG");
         var myObstacles = [];
         function startGame() {
           gamearea.start();
@@ -44,12 +50,24 @@
           return false;
         }
 
+        var scoreText= {
+            x:900,
+            y:50,
+            update:function(text){
+                gamearea.context.fillStyle="gray";
+                gamearea.context.font="30px Lucida Handwriting";
+                gamearea.context.fillText(text,this.x,this.y);
+            }
+        }
         //player1
         var player = {
           x: 10,
           y:850,
-          speedY: 100,
+         // speedY: 0,
           currentJumpHeight:0,
+          
+          
+          
           jump() {
             console.log(player.currentJumpHeight)
             // gamearea.context.translate (0,this.speedY)
@@ -57,14 +75,15 @@
             img.src = "./assets/png/Idle.png"; // Set source path
             //gamearea.context.drawImage(img, 0, 400, 100, 100);
 
- if(player.currentJumpHeight < 15) {
+ if(player.currentJumpHeight < 12) {
     console.log(player.currentJumpHeight)
   gamearea.context.clearRect(0, 0,player.x,player.y)
   gamearea.context.translate(0, -20);
   gamearea.context.drawImage(img, 0, 400, player.x,player.y);
     setTimeout(function (){
         player.jump()
-    },15)
+        audio.play ("audioJ");
+    },20)
     player.currentJumpHeight++
   } else {
     fall()
@@ -88,7 +107,7 @@ function fall() {
     gamearea.context.drawImage(img, 0, 200, player.x,player.y);
     setTimeout(function (){
         fall()
-    },50)
+    },80)
     player.currentJumpHeight--
   }
 }
@@ -98,6 +117,7 @@ function fall() {
             img.src = "./assets/png/Idle.png"; // Set source path
             gamearea.context.drawImage(img, this.x, this.y);
           },
+          
         };
         //game.scale
         //map=obstacle
@@ -126,6 +146,7 @@ function fall() {
               document.body.childNodes[0]
             );
             this.frame = 0;
+            this.score=0;
             this.context = this.canvas.getContext("2d");
 
             this.interval = setInterval(this.updateGameArea, 4);
@@ -147,6 +168,8 @@ function fall() {
             }
             player.update();
             gamearea.frame += 1;
+            gamearea.score +=0.01;
+            scoreText.update("Score:"+Math.floor(gamearea.score));
           },
           clear: function () {
             gamearea.context.clearRect(
@@ -156,7 +179,11 @@ function fall() {
               this.canvas.width
             );
           },
-          stop: function () {},
+          stop: function () {
+              clearInterval(this.interval);
+              alert("Game over!!");
+              audioj.play();
+          },
         };
       </script>
     </body>
