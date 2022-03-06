@@ -37,10 +37,11 @@
         }
         let myobstacle = new Obstacle();
         
-        
+        var myObstacles = [];
         var audio=document.getElementById("audioJ");
         var audio=document.getElementById("audioG");
-        var myObstacles = [];
+        var colors=["red","blue","purple","brown","black","yellow"]
+        
         function startGame() {
           gamearea.start();
         }
@@ -54,9 +55,10 @@
             x:900,
             y:50,
             update:function(text){
-                gamearea.context.fillStyle="gray";
+                gamearea.context.fillStyle="red";
                 gamearea.context.font="30px Lucida Handwriting";
                 gamearea.context.fillText(text,this.x,this.y);
+                
             }
         }
         //player1
@@ -121,16 +123,19 @@ function fall() {
         };
         //game.scale
         //map=obstacle
-        function map() {
+        function obstacle() {
           this.height = Math.floor(
             minHeight + Math.random() * (maxHeight - minHeight + 1)
           );
           this.width = Math.floor(
             maxWidth + Math.random() * (maxWidth - minWidth + 1)
           );
+          this.index=Math.floor(Math.random()*colors.length);
+          this.color=colors[this.index];
           this.draw = function () {
-            //x=1200;
-            // y=gamearea.canvas.height-this.height;
+              gamearea.context.fillStyle=this.color;
+            //this.x=1200;
+            // this.y=gamearea.canvas.height-this.height;
             //gamearea.context.fillRect(x,y,this.width,this.height)
           };
         }
@@ -148,7 +153,7 @@ function fall() {
             this.frame = 0;
             this.score=0;
             this.context = this.canvas.getContext("2d");
-
+            scoreText.update("Score:"+Math.floor(gamearea.score));
             this.interval = setInterval(this.updateGameArea, 4);
             window.addEventListener("keydown", player.jump);
           },
@@ -182,7 +187,7 @@ function fall() {
           stop: function () {
               clearInterval(this.interval);
               alert("Game over!!");
-              audioj.play();
+              audioJ.play();
           },
         };
       </script>
