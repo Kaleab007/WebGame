@@ -1,6 +1,7 @@
 <html>
   <head>
-    <link href="main.css">
+    <link href="main.css" />
+    <link  href="assets/png/jumpsound.mp3">
     <style>
       canvas {
         background-size: cover;
@@ -8,12 +9,9 @@
       }
     </style>
     <body onload="startGame()">
-        <audio src="jumpsound.mp3" id="audioJ"></audio>
-        <audio src="gameover.mp3" id="audioG"></audio>
-    
+      <audio src="jumpsound.mp3" id="audioJ"></audio>
+
       <script type="text/javascript">
-         
-      
         //obstacle.size
         class Obstacle {
           constructor() {
@@ -23,8 +21,6 @@
             this.maxWidth = 80;
             this.minGap = 200;
             this.maxGap = 500;
-            
-            
           }
           randGap() {
             return Math.floor(
@@ -32,16 +28,15 @@
             );
           }
           draw() {
-            gamearea.context.fillRect(1840,850, this.maxWidth, this.maxHeight);
+            gamearea.context.fillRect(1840, 850, this.maxWidth, this.maxHeight);
           }
         }
         let myobstacle = new Obstacle();
-        
+
         var myObstacles = [];
-        var audio=document.getElementById("audioJ");
-        var audio=document.getElementById("audioG");
-        var colors=["red","blue","purple","brown","black","yellow"]
-        
+        var audio = document.getElementById("audioJ");
+        var colors = ["red", "blue", "purple", "brown", "black", "yellow"];
+
         function startGame() {
           gamearea.start();
         }
@@ -51,75 +46,69 @@
           return false;
         }
 
-        var scoreText= {
-            x:900,
-            y:50,
-            update:function(text){
-                gamearea.context.fillStyle="red";
-                gamearea.context.font="30px Lucida Handwriting";
-                gamearea.context.fillText(text,this.x,this.y);
-                
-            }
-        }
+        var scoreText = {
+          x: 900,
+          y: 50,
+          update: function (text) {
+            gamearea.context.fillStyle = "red";
+            gamearea.context.font = "30px Lucida Handwriting";
+            gamearea.context.fillText(text, this.x, this.y);
+          },
+        };
         //player1
         var player = {
           x: 10,
-          y:850,
-         // speedY: 0,
-          currentJumpHeight:0,
-          
-          
-          
+          y: 850,
+          // speedY: 0,
+          currentJumpHeight: 0,
           jump() {
-            console.log(player.currentJumpHeight)
+            console.log(player.currentJumpHeight);
             // gamearea.context.translate (0,this.speedY)
             var img = new Image(); // Create new img element
             img.src = "./assets/png/Idle.png"; // Set source path
             //gamearea.context.drawImage(img, 0, 400, 100, 100);
 
- if(player.currentJumpHeight < 12) {
-    console.log(player.currentJumpHeight)
-  gamearea.context.clearRect(0, 0,player.x,player.y)
-  gamearea.context.translate(0, -20);
-  gamearea.context.drawImage(img, 0, 400, player.x,player.y);
-    setTimeout(function (){
-        player.jump()
-        audio.play ("audioJ");
-    },20)
-    player.currentJumpHeight++
-  } else {
-    fall()
-  }
+            if (player.currentJumpHeight < 12) {
+              console.log(player.currentJumpHeight);
+              gamearea.context.clearRect(0, 0, player.x, player.y);
+              gamearea.context.translate(0, -20);
+              gamearea.context.drawImage(img, 0, 400, player.x, player.y);
+              setTimeout(function () {
+                player.jump();
+                audio.play("audioJ");
+              }, 20);
+              player.currentJumpHeight++;
+            } else {
+              fall();
+            }
 
+            //clearing.the.jump
+            //newPos:function() {
+            // if(player.y<280)=2;
+            //}
+            //player.y=player.yplayer.speedY;
+            //if(player.speedY==2 && player.y==850) {
+            // player.speedY=0;
+            //}
 
-//clearing.the.jump
-//newPos:function() {
-   // if(player.y<280)=2;
-//}
-//player.y=player.yplayer.speedY;
-//if(player.speedY==2 && player.y==850) {
-   // player.speedY=0;
-//}
-
-function fall() {
-  if(player.currentJumpHeight > 0) {
-    console.log(player.currentJumpHeight)
-    gamearea.context.clearRect(0,0,player.x,player.y)
-    gamearea.context.translate(0, 20);
-    gamearea.context.drawImage(img, 0, 200, player.x,player.y);
-    setTimeout(function (){
-        fall()
-    },80)
-    player.currentJumpHeight--
-  }
-}
-      },
+            function fall() {
+              if (player.currentJumpHeight > 0) {
+                console.log(player.currentJumpHeight);
+                gamearea.context.clearRect(0, 0, player.x, player.y);
+                gamearea.context.translate(0, 20);
+                gamearea.context.drawImage(img, 0, 200, player.x, player.y);
+                setTimeout(function () {
+                  fall();
+                }, 80);
+                player.currentJumpHeight--;
+              }
+            }
+          },
           update: function () {
             var img = new Image(); // Create new img element
             img.src = "./assets/png/Idle.png"; // Set source path
             gamearea.context.drawImage(img, this.x, this.y);
           },
-          
         };
         //game.scale
         //map=obstacle
@@ -130,12 +119,12 @@ function fall() {
           this.width = Math.floor(
             maxWidth + Math.random() * (maxWidth - minWidth + 1)
           );
-          this.index=Math.floor(Math.random()*colors.length);
-          this.color=colors[this.index];
+          this.index = Math.floor(Math.random() * colors.length);
+          this.color = colors[this.index];
           this.draw = function () {
-              gamearea.context.fillStyle=this.color;
-            //this.x=1200;
-            // this.y=gamearea.canvas.height-this.height;
+            gamearea.context.fillStyle = this.color;
+            // this.x=1200;
+            //this.y=gamearea.canvas.height-this.height;
             //gamearea.context.fillRect(x,y,this.width,this.height)
           };
         }
@@ -151,9 +140,9 @@ function fall() {
               document.body.childNodes[0]
             );
             this.frame = 0;
-            this.score=0;
+            this.score = 0;
             this.context = this.canvas.getContext("2d");
-            scoreText.update("Score:"+Math.floor(gamearea.score));
+            scoreText.update("Score:" + Math.floor(gamearea.score));
             this.interval = setInterval(this.updateGameArea, 4);
             window.addEventListener("keydown", player.jump);
           },
@@ -165,7 +154,7 @@ function fall() {
             let updatedobstacle = new Obstacle();
             myObstacles.push(updatedobstacle);
             let gap = updatedobstacle.randGap();
-            gamearea.frame = 0;
+            gamearea.frame = 1;
             // }
             for (i = 0; i < myObstacles.length; i++) {
               myObstacles[i].x = -1;
@@ -173,8 +162,8 @@ function fall() {
             }
             player.update();
             gamearea.frame += 1;
-            gamearea.score +=0.01;
-            scoreText.update("Score:"+Math.floor(gamearea.score));
+            gamearea.score += 0.01;
+            scoreText.update("Score:" + Math.floor(gamearea.score));
           },
           clear: function () {
             gamearea.context.clearRect(
@@ -185,12 +174,12 @@ function fall() {
             );
           },
           stop: function () {
-              clearInterval(this.interval);
-              alert("Game over!!");
-              audioJ.play();
+            clearInterval(this.interval);
+            alert("Game over!!");
+            audioJ.play();
           },
         };
       </script>
     </body>
   </head>
-</html> 
+</html>
