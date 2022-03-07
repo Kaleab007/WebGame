@@ -53,7 +53,8 @@
              gamearea.context.font = "30px Lucida Handwriting";
              gamearea.context.fillText(text, this.x, this.y);
             // canvas.addEventListener('click', function(event){
-              //  if (jump(obstacle,event.
+              //if (player.currentJumpHeight < 12) {
+                    // scoreText.update("Score:" + Math.floor(gamearea.score))
            }
         
          };
@@ -119,13 +120,7 @@
            this.index = Math.floor(Math.random() * colors.length);
            this.color = colors[this.index];
            this.draw = function () {
-            // <--gamearea.clearRect(this.xPosition, this.yPosition, this.xWidth, this.yHeight);
-          //this.xPosition -= 1
-    //gamearea.beginPath()
-      //  gamearea.translate(0, 0) // NEED TO MOVE CANVAS TO RIGHT SPOT BEFORE REDRAWING
-        //gamearea.fillRect(this.xPosition, this.yPosition, this.xWidth, this.yHeight);
-         //if(this.xPosition < -10) {
-        // this.xPosition = 300
+            
              gamearea.context.fillStyle = this.color;
 
            };
