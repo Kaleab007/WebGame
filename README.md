@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 # WebGame-Milestone P1
 
+=======
+# WebGame
+>>>>>>> bfbb76b83378f0dada11695223cc06a7ce2a9bd0
 
 Requirements
 General Requirements
@@ -67,4 +71,8 @@ ColorMind- Make a Color Pallette from an Image
 MyColor- Generate a Color Pallette based around one color
 Canva- Lots of stuff including a color pallette generator
 Unsplash- Free Stock Images
+<<<<<<< HEAD
 FAQ
+=======
+FAQ
+>>>>>>> bfbb76b83378f0dada11695223cc06a7ce2a9bd0
