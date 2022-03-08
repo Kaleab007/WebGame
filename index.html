@@ -52,9 +52,9 @@
              gamearea.context.fillStyle = "red";
              gamearea.context.font = "30px Lucida Handwriting";
              gamearea.context.fillText(text, this.x, this.y);
-            // canvas.addEventListener('click', function(event){
-              //if (player.currentJumpHeight < 12) {
-                    // scoreText.update("Score:" + Math.floor(gamearea.score))
+                // canvas.addEventListener('click', function(event){
+                //if (player.currentJumpHeight < 12) {
+                //  scoreText.update("Score:" ++Math.floor(gamearea.score))
            }
         
          };
@@ -79,7 +79,7 @@
                setTimeout(function () {
                  player.jump();
                  audio.play("audioJ");
-               }, 20);
+               }, 30);
                player.currentJumpHeight++;
              } else {
                fall();
@@ -97,7 +97,7 @@
                  },100)
                  setTimeout(function () {
                    fall();
-                 }, 80);
+                 }, 90);
                  player.currentJumpHeight--;
                }
              }
@@ -120,7 +120,7 @@
            this.index = Math.floor(Math.random() * colors.length);
            this.color = colors[this.index];
            this.draw = function () {
-            
+             
              gamearea.context.fillStyle = this.color;
 
            };
