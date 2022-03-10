@@ -92,10 +92,10 @@
                  gamearea.context.clearRect(0, 0, player.x, player.y);
                  gamearea.context.translate(0, 20);
                  gamearea.context.drawImage(img, 0, 200, player.x, player.y);
-                 setInterval(function(){
-                     obstacle.update()
-                     console.log(obstacle)
-                 },100)
+                //  setInterval(function(){
+                //      obstacle.update()
+                //      console.log(obstacle)
+                //  },100)
                  setTimeout(function () {
                    fall();
                  }, 90);
@@ -103,6 +103,7 @@
                }
              }
            },
+           
            update: function () {
              var img = new Image(); // Create new img element
              img.src = "./assets/png/Idle.png"; // Set source path
@@ -126,6 +127,17 @@
 
            };
          }
+//          function() {
+  
+//   if (myObstacles < player.width){ 
+//     // if so move the obstacle to the left
+//     myObstacles.x-=speed;
+//   } else { 
+//     // if not... (i.e. the obstacle right the screen)
+//     // new if... 
+//     // if the player still 'alive'
+//     if (player.opacity !=0){ 
+//       score++;
          //size.of.the.game
          var gamearea = {
            canvas: document.createElement("canvas"),
