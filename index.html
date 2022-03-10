@@ -7,7 +7,7 @@
         background-size: cover;
         background-image: url(https://i0.wp.com/sitn.hms.harvard.edu/wp-content/uploads/2020/07/Mars_zichtbaar_vanaf_de_alpe_du_hues-scaled.jpg?resize=1000/1000=1);
       }
-    </style>
+    </style> 
     <body onload="startGame()">
       <audio src="/assets/png/jumpsound.mp3" id="audioJ"></audio>
 
@@ -152,7 +152,11 @@
              let updatedobstacle = new Obstacle();
              myObstacles.push(updatedobstacle);
              let gap = updatedobstacle.randGap();
-             gamearea.frame = 1;
+             function moveLeft() {
+                 updatedobstacle.speedX -=1;
+
+             }
+
              // }
              for (i = 0; i < myObstacles.length; i++) {
                myObstacles[i].x = -1;
