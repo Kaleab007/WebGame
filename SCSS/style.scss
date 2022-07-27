@@ -1,0 +1,23 @@
+.body { 
+    @include top (auto);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box
+}
+.page {
+    box-sizing:border-box;
+.table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.player {
+    width: 60px;
+    height: 60px;
+    background-color: $hover-color;
+    position: absolute;
+}
+}
