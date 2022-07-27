@@ -20,4 +20,17 @@
     background-color: $hover-color;
     position: absolute;
 }
+.sound {
+    @mixin jump { 
+      &:hover{color:$hover-color;}
+    }
+    &{
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        order: 1;
+        @content
+    }
+        
+    }
 }
