@@ -1,7 +1,8 @@
 <html>
   <head>
       <title>Jumpman</title>
-    <link href="main.css" />
+    <link rel= "stylesheet" href="SCSS\style.css" />
+    <link rel= "stylesheet" href="SCSS\style.scss" />
     <style>
       canvas {
         background-size: cover;
@@ -73,7 +74,7 @@
              //gamearea.context.drawImage(img, 0, 400, 100, 100);
 
              if (player.currentJumpHeight < 12) {
-               console.log(player.currentJumpHeight);
+               console.log(player.currentJumpHeight); 
                gamearea.context.clearRect(0, 0, player.x, player.y);
                gamearea.context.translate(0, -20);
                gamearea.context.drawImage(img, 0, 400, player.x, player.y);
